@@ -13,15 +13,16 @@ export class SorterPipe implements PipeTransform {
    */
   transform(value: any[], key: string): any[] {
     // A KÖVETKEZŐ SORT TÁVOLÍTSD EL!!!
-    return value;
+    // return value;
 
     /**
      * FELADAT!
      * Ellenőrzés: ha a value nem tömb vagy nincs megadva a key,
      * térj vissza a value változóval.
      */
-
-
+    if (!Array.isArray(value) || !key) {
+      return value;
+    }
 
     /**
      * FELADAT!
@@ -32,9 +33,11 @@ export class SorterPipe implements PipeTransform {
      * 3. Térj vissza a két string localeCompare metódus által visszaadott
      *  összehasonlításának az eredményével.
      */
-
-
+    return value.sort((a, b) => 
+      typeof a[key] === 'number' && typeof b[key] === 'number' 
+        ? a[key] - b[key] 
+        : a[key].toString().toLowerCase().localeCompare(b[key].toString().toLowerCase())
+    );
   }
-
 }
 
